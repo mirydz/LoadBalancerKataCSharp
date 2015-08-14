@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLoadBalancer", "ServerLoadBalancer\ServerLoadBalancer.csproj", "{8DDF5DEC-C417-4D9B-B550-4C432C0A9541}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLoadBalancer.Tests", "ServerLoadBalancer.Tests\ServerLoadBalancer.Tests.csproj", "{C4A20918-1E5C-4B6E-89EB-40D81596D489}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DDF5DEC-C417-4D9B-B550-4C432C0A9541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDF5DEC-C417-4D9B-B550-4C432C0A9541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDF5DEC-C417-4D9B-B550-4C432C0A9541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDF5DEC-C417-4D9B-B550-4C432C0A9541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4A20918-1E5C-4B6E-89EB-40D81596D489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A20918-1E5C-4B6E-89EB-40D81596D489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A20918-1E5C-4B6E-89EB-40D81596D489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A20918-1E5C-4B6E-89EB-40D81596D489}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
