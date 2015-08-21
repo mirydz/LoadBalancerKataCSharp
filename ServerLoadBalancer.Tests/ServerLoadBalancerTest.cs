@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using static ServerLoadBalancer.Tests.ServerBuilder;
 
 namespace ServerLoadBalancer.Tests
 {
@@ -52,10 +53,5 @@ namespace ServerLoadBalancer.Tests
         {
             return builder.Build();
         } 
-
-        private ServerBuilder Server()
-        {
-            return new ServerBuilder();
-        }
     }
 }

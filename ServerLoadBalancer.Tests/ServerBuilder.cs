@@ -14,5 +14,10 @@
         {
             return new Server(capacity);
         }
+
+        public static ServerBuilder Server()
+        {
+            return new ServerBuilder();
+        }
     }
 }
