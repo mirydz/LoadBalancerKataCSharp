@@ -8,5 +8,9 @@ namespace ServerLoadBalancer
 {
     public class Vm
     {
+        public Vm(int size)
+        {
+
+        }
     }
 }

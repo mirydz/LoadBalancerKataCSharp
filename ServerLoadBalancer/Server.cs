@@ -15,5 +15,10 @@ namespace ServerLoadBalancer
         {
             this.capacity = capacity;
         }
+
+        public bool contains(Vm theVm)
+        {
+            return true;
+        }
     }
 }

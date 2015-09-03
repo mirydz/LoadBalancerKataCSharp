@@ -64,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerBuilder.cs" />
     <Compile Include="ServerLoadBalancerTest.cs" />
+    <Compile Include="VmBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
