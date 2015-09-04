@@ -2,7 +2,7 @@
 
 namespace ServerLoadBalancer.Tests
 {
-    internal class VmBuilder
+    internal class VmBuilder : IBuilder<Vm>
     {
         private int size;
 
@@ -15,6 +15,11 @@ namespace ServerLoadBalancer.Tests
         public Vm Build()
         {
             return new Vm(this.size);
+        }
+
+        public static VmBuilder Vm()
+        {
+            return new VmBuilder();
         }
     }
 }

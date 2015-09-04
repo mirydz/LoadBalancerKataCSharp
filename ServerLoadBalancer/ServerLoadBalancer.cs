@@ -10,7 +10,7 @@ namespace ServerLoadBalancer
     {
         public void Balance(Server[] servers, Vm[] vms)
         {
-            if(vms.Length > 0)
+            if (vms.Length > 0)
             {
                 servers[0].CurrentLoadPercentage = 100.0;
             }

@@ -1,6 +1,6 @@
 ﻿namespace ServerLoadBalancer.Tests
 {
-    internal class ServerBuilder
+    internal class ServerBuilder : IBuilder<Server>
     {
         private int capacity;
 

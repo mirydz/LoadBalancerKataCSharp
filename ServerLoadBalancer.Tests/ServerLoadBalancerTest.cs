@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using static ServerLoadBalancer.Tests.ServerBuilder;
+using static ServerLoadBalancer.Tests.VmBuilder;
 
 namespace ServerLoadBalancer.Tests
 {
@@ -37,7 +38,7 @@ namespace ServerLoadBalancer.Tests
             Balance(ListOfServersWith(theServer), ListOfVmsWith(theVm));
 
             Assert.That(theServer, HasLoadPercentageOf(100.0));
-            Assert.That(theServer.contains(theVm));
+            Assert.That(theServer.Contains(theVm), "The server should contain the vm");
         }
 
         private Constraint HasLoadPercentageOf(double expectedLoadPerentage)
@@ -51,9 +52,14 @@ namespace ServerLoadBalancer.Tests
             loadBalancer.Balance(servers, vms);
         }
 
-        private Server[] ListOfServersWith(Server theServer)
+        private Server[] ListOfServersWith(Server server)
         {
-            return new Server[] { theServer };
+            return new Server[] { server };
+        }
+
+        private Vm[] ListOfVmsWith(Vm vm)
+        {
+            return new Vm[] { vm };
         }
 
         private Vm[] EmptyListOfVms()
@@ -61,9 +67,12 @@ namespace ServerLoadBalancer.Tests
             return new Vm[0];
         }
 
-        private Server A(ServerBuilder builder)
+        private T A<T>(IBuilder<T> builder)
         {
             return builder.Build();
-        } 
+        }
+
+
+
     }
 }
