@@ -40,5 +40,10 @@ namespace ServerLoadBalancer.Tests
         {
             return d1 == d2 || Math.Abs(d1 - d2) < EPSILON;
         }
+
+        public static Constraint HasLoadPercentageOf(double expectedLoadPerentage)
+        {
+            return new CurrentLoadPercentageConstraint(expectedLoadPerentage);
+        }
     }
 }

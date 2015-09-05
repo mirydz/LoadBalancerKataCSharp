@@ -8,6 +8,7 @@ using NUnit.Framework.Constraints;
 using static ServerLoadBalancer.Tests.ServerBuilder;
 using static ServerLoadBalancer.Tests.VmBuilder;
 using static ServerLoadBalancer.Tests.ServerVmsCountConstraint;
+using static ServerLoadBalancer.Tests.CurrentLoadPercentageConstraint;
 
 namespace ServerLoadBalancer.Tests
 {
@@ -66,11 +67,6 @@ namespace ServerLoadBalancer.Tests
             Assert.That(theServer, HasVmsCountOf(2));
             Assert.That(theServer.Contains(theFirstVm), "The server should contain the vm");
             Assert.That(theServer.Contains(theSecondVm), "The server should contain the vm");
-        }
-
-        private Constraint HasLoadPercentageOf(double expectedLoadPerentage)
-        {
-            return new CurrentLoadPercentageConstraint(expectedLoadPerentage);
         }
 
         private void Balance(Server[] servers, Vm[] vms)
