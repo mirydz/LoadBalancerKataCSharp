@@ -12,7 +12,8 @@ namespace ServerLoadBalancer
         {
             if (vms.Length > 0)
             {
-                servers[0].CurrentLoadPercentage = 100.0;
+                servers[0].CurrentLoadPercentage = (double) vms[0].Size
+                    / (double) servers[0].Capacity * 100.0;
             }
         }
     }

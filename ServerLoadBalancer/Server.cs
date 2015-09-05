@@ -8,12 +8,12 @@ namespace ServerLoadBalancer
 {
     public class Server
     {
-        private int capacity;
+        public int Capacity { get; private set; }
         public double CurrentLoadPercentage { get; set; }
 
         public Server(int capacity)
         {
-            this.capacity = capacity;
+            this.Capacity = capacity;
         }
 
         public bool Contains(Vm vm)

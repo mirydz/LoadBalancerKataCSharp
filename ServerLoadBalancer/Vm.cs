@@ -8,9 +8,11 @@ namespace ServerLoadBalancer
 {
     public class Vm
     {
+        public int Size { get; private set; }
+
         public Vm(int size)
         {
-
+            this.Size = size;
         }
     }
 }
