@@ -8,17 +8,24 @@ namespace ServerLoadBalancer
 {
     public class Server
     {
-        public int Capacity { get; private set; }
+        private static readonly double MAXIMUM_LOAD = 100.0;
+        private int capacity;
         public double CurrentLoadPercentage { get; set; }
 
         public Server(int capacity)
         {
-            this.Capacity = capacity;
+            this.capacity = capacity;
         }
 
         public bool Contains(Vm vm)
         {
             return true;
+        }
+
+        public void AddVm(Vm vm)
+        {
+            this.CurrentLoadPercentage = (double)vm.Size
+                / (double) this.capacity * MAXIMUM_LOAD;
         }
     }
 }
