@@ -10,9 +10,9 @@ namespace ServerLoadBalancer
     {
         public void Balance(Server[] servers, Vm[] vms)
         {
-            if (vms.Length > 0)
+            foreach (var vm in vms)
             {
-                servers[0].AddVm(vms[0]);
+                servers[0].AddVm(vm);
             }
         }
     }

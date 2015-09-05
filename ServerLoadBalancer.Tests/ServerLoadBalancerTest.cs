@@ -42,20 +42,6 @@ namespace ServerLoadBalancer.Tests
         }
 
         [Test]
-        public void BalancingServerWithEnoughRoom_GetsFilledWithAllVms()
-        {
-            Server theServer = A(Server().WithCapacity(100));
-            Vm theFirstVm = A(Vm().OfSize(1));
-            Vm theSecondVm = A(Vm().OfSize(1));
-            
-            Balance(ListOfServersWith(theServer), ListOfVmsWith(theFirstVm, theSecondVm));
-
-            Assert.That(theServer, HasVmsCountOf(2));
-            Assert.That(theServer.Contains(theFirstVm), "The server should contain the vm");
-            Assert.That(theServer.Contains(theSecondVm), "The server should contain the vm");
-        }
-
-        [Test]
         public void BalancingOneServerWithTenSlotsCapacity_AndOneSlotVm_FillsServerWIthTenPercent()
         {
             Server theServer = A(Server().WithCapacity(10));
@@ -67,9 +53,28 @@ namespace ServerLoadBalancer.Tests
             Assert.That(theServer.Contains(theVm), "The server should contain the vm");
         }
 
+        [Test]
+        public void BalancingServerWithEnoughRoom_GetsFilledWithAllVms()
+        {
+            Server theServer = A(Server().WithCapacity(100));
+            Vm theFirstVm = A(Vm().OfSize(1));
+            Vm theSecondVm = A(Vm().OfSize(1));
+
+            Balance(ListOfServersWith(theServer), ListOfVmsWith(theFirstVm, theSecondVm));
+
+            Assert.That(theServer, HasVmsCountOf(2));
+            Assert.That(theServer.Contains(theFirstVm), "The server should contain the vm");
+            Assert.That(theServer.Contains(theSecondVm), "The server should contain the vm");
+        }
+
         private Constraint HasLoadPercentageOf(double expectedLoadPerentage)
         {
             return new CurrentLoadPercentageConstraint(expectedLoadPerentage);
+        }
+
+        private Constraint HasVmsCountOf(int expectedCount)
+        {
+            return new ServerVmsCountConstraint(expectedCount);
         }
 
         private void Balance(Server[] servers, Vm[] vms)
@@ -83,9 +88,9 @@ namespace ServerLoadBalancer.Tests
             return new Server[] { server };
         }
 
-        private Vm[] ListOfVmsWith(Vm vm)
+        private Vm[] ListOfVmsWith(params Vm[] vms)
         {
-            return new Vm[] { vm };
+            return vms;
         }
 
         private Vm[] EmptyListOfVms()
