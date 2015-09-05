@@ -34,5 +34,10 @@ namespace ServerLoadBalancer.Tests
         {
             writer.WriteActualValue(this.actualCount);
         }
+
+        public static Constraint HasVmsCountOf(int expectedCount)
+        {
+            return new ServerVmsCountConstraint(expectedCount);
+        }
     }
 }

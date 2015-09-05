@@ -7,6 +7,7 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using static ServerLoadBalancer.Tests.ServerBuilder;
 using static ServerLoadBalancer.Tests.VmBuilder;
+using static ServerLoadBalancer.Tests.ServerVmsCountConstraint;
 
 namespace ServerLoadBalancer.Tests
 {
@@ -70,11 +71,6 @@ namespace ServerLoadBalancer.Tests
         private Constraint HasLoadPercentageOf(double expectedLoadPerentage)
         {
             return new CurrentLoadPercentageConstraint(expectedLoadPerentage);
-        }
-
-        private Constraint HasVmsCountOf(int expectedCount)
-        {
-            return new ServerVmsCountConstraint(expectedCount);
         }
 
         private void Balance(Server[] servers, Vm[] vms)
