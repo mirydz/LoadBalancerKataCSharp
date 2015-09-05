@@ -41,6 +41,18 @@ namespace ServerLoadBalancer.Tests
             Assert.That(theServer.Contains(theVm), "The server should contain the vm");
         }
 
+        [Test]
+        public void BalancingOneServerWithTenSlotsCapacity_AndOneSlotVm_FillsServerWIthTenPercent()
+        {
+            Server theServer = A(Server().WithCapacity(10));
+            Vm theVm = A(Vm().OfSize(1));
+
+            Balance(ListOfServersWith(theServer), ListOfVmsWith(theVm));
+
+            Assert.That(theServer, HasLoadPercentageOf(10.0));
+            Assert.That(theServer.Contains(theVm), "The server should contain the vm");
+        }
+
         private Constraint HasLoadPercentageOf(double expectedLoadPerentage)
         {
             return new CurrentLoadPercentageConstraint(expectedLoadPerentage);
