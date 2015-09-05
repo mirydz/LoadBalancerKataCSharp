@@ -42,6 +42,20 @@ namespace ServerLoadBalancer.Tests
         }
 
         [Test]
+        public void BalancingServerWithEnoughRoom_GetsFilledWithAllVms()
+        {
+            Server theServer = A(Server().WithCapacity(100));
+            Vm theFirstVm = A(Vm().OfSize(1));
+            Vm theSecondVm = A(Vm().OfSize(1));
+            
+            Balance(ListOfServersWith(theServer), ListOfVmsWith(theFirstVm, theSecondVm));
+
+            Assert.That(theServer, HasVmsCountOf(2));
+            Assert.That(theServer.Contains(theFirstVm), "The server should contain the vm");
+            Assert.That(theServer.Contains(theSecondVm), "The server should contain the vm");
+        }
+
+        [Test]
         public void BalancingOneServerWithTenSlotsCapacity_AndOneSlotVm_FillsServerWIthTenPercent()
         {
             Server theServer = A(Server().WithCapacity(10));
