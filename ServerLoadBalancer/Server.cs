@@ -36,7 +36,7 @@ namespace ServerLoadBalancer
         public void AddVm(Vm vm)
         {
             this.vms.Add(vm);
-            this.CurrentLoadPercentage = LoadOfVm(vm);
+            this.CurrentLoadPercentage += LoadOfVm(vm);
         }
 
         public bool CanFit(Vm vm)
