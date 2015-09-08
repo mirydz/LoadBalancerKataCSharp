@@ -1,4 +1,6 @@
-﻿namespace ServerLoadBalancer.Tests
+﻿using static ServerLoadBalancer.Server;
+
+namespace ServerLoadBalancer.Tests
 {
     internal class ServerBuilder : IBuilder<Server>
     {
@@ -17,14 +19,20 @@
             return this;
         }
 
+        private void AddInitaialLoad(Server server)
+        {
+            if (this.initialLoad > 0)
+            {
+                int expectedLoad = (int)(initialLoad / MAXIMUM_LOAD 
+                                         * (double)server.Capacity);
+                server.AddVm(VmBuilder.Vm().OfSize(expectedLoad).Build());
+            }
+        }
+
         public Server Build()
         {
             var server =  new Server(capacity);
-            if (initialLoad > 0)
-            {
-                int expectedLoad =  (int) (initialLoad / 100.0 * (double) server.Capacity);
-                server.AddVm(VmBuilder.Vm().OfSize(expectedLoad).Build());
-            }
+            AddInitaialLoad(server);
             return server;
         }
 

@@ -8,8 +8,8 @@ namespace ServerLoadBalancer
 {
     public class Server
     {
-        private static readonly double MAXIMUM_LOAD = 100.0;
         private List<Vm> vms = new List<Vm>();
+        public static readonly double MAXIMUM_LOAD = 100.0;
         public int Capacity { get; private set; }
         public double CurrentLoadPercentage { get; set; }
         public int VmsCount

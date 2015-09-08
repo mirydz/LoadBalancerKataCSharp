@@ -78,7 +78,7 @@ namespace ServerLoadBalancer.Tests
 
             Balance(ListOfServersWith(moreLoadedServer, lessLoadedServer), ListOfVmsWith(theVm));
 
-            Assert.That(lessLoadedServer.Contains(theVm), "The server should contain the vm");
+            Assert.That(lessLoadedServer.Contains(theVm), "The less loaded server should contain the vm");
         }
 
         private void Balance(Server[] servers, Vm[] vms)
