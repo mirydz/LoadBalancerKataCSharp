@@ -12,15 +12,20 @@ namespace ServerLoadBalancer
         {
             foreach (var vm in vms)
             {
-                var serversWithEnoughCapacity = new List<Server>();
-                foreach (var server in servers)
-                {
-                    if (server.CanFit(vm))
-                        serversWithEnoughCapacity.Add(server);
-                }
-                Server lessLoaded = ExtractLessLoadedServer(serversWithEnoughCapacity);
-                lessLoaded?.AddVm(vm);
+                AddToCapableLessLoadedServer(servers, vm);
             }
+        }
+
+        private void AddToCapableLessLoadedServer(Server[] servers, Vm vm)
+        {
+            var serversWithEnoughCapacity = FindServersWithEnoughCapacity(servers, vm);
+            var lessLoaded = ExtractLessLoadedServer(serversWithEnoughCapacity);
+            lessLoaded?.AddVm(vm);
+        }
+
+        private static List<Server> FindServersWithEnoughCapacity(Server[] servers, Vm vm)
+        {
+            return servers.Where(server => server.CanFit(vm)).ToList();
         }
 
         private Server ExtractLessLoadedServer(List<Server> servers)
@@ -38,3 +43,4 @@ namespace ServerLoadBalancer
         }
     }
 }
+                                                                                                

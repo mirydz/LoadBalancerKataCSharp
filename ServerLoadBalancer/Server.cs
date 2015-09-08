@@ -28,17 +28,20 @@ namespace ServerLoadBalancer
             return this.vms.Contains(vm);
         }
 
+        private double LoadOfVm(Vm vm)
+        {
+            return ((double) vm.Size / (double) this.Capacity * MAXIMUM_LOAD);
+        }
+
         public void AddVm(Vm vm)
         {
             this.vms.Add(vm);
-            this.CurrentLoadPercentage = (double)vm.Size
-                / (double) this.Capacity * MAXIMUM_LOAD;
+            this.CurrentLoadPercentage = LoadOfVm(vm);
         }
 
         public bool CanFit(Vm vm)
         {
-            return this.CurrentLoadPercentage
-                   + ((double) vm.Size / (double) this.Capacity * MAXIMUM_LOAD) <= MAXIMUM_LOAD;
+            return this.CurrentLoadPercentage + LoadOfVm(vm) <= MAXIMUM_LOAD;
         }
     }
 }
