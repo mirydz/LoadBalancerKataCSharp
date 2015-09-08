@@ -81,6 +81,17 @@ namespace ServerLoadBalancer.Tests
             Assert.That(lessLoadedServer.Contains(theVm), "The less loaded server should contain the vm");
         }
 
+        [Test]
+        public void BalanceServerWithNotEnoughRoom_ShouldNotBeFilledWithVm()
+        {
+            Server theServer = A(Server().WithCapacity(100).WithCurrentLoadOf(90.0));
+            Vm theVm = A(Vm().OfSize(11));
+
+            Balance(ListOfServersWith(theServer), ListOfVmsWith(theVm));
+
+            Assert.That(theServer.Contains(theVm), Is.False, "The server should not contain the vm");
+        }
+
         private void Balance(Server[] servers, Vm[] vms)
         {
             var loadBalancer = new ServerLoadBalancer();
