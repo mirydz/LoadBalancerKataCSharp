@@ -92,6 +92,25 @@ namespace ServerLoadBalancer.Tests
             Assert.That(theServer.Contains(theVm), Is.False, "The server should not contain the vm");
         }
 
+        [Test]
+        public void Balance_ServersAndVms()
+        {
+            Server server1 = A(Server().WithCapacity(4));
+            Server server2 = A(Server().WithCapacity(6));
+            Vm vm1 = A(Vm().OfSize(1));
+            Vm vm2 = A(Vm().OfSize(4));
+            Vm vm3 = A(Vm().OfSize(2));
+
+            Balance(ListOfServersWith(server1, server2), ListOfVmsWith(vm1, vm2, vm3));
+
+            Assert.That(server1.Contains(vm1), "The server 1 should contain the vm1");
+            Assert.That(server2.Contains(vm2), "The server 2 should contain the vm2");
+            Assert.That(server1.Contains(vm3), "The server 1 should contain the vm3");
+
+            Assert.That(server1, HasLoadPercentageOf(75.0));
+            Assert.That(server2, HasLoadPercentageOf(66.66));
+        }
+
         private void Balance(Server[] servers, Vm[] vms)
         {
             var loadBalancer = new ServerLoadBalancer();
