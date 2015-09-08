@@ -12,7 +12,16 @@ namespace ServerLoadBalancer
         {
             foreach (var vm in vms)
             {
-                servers[0].AddVm(vm);
+                Server lessLoaded = null;
+                foreach (var server in servers)
+                {
+                    if (lessLoaded == null ||
+                        lessLoaded.CurrentLoadPercentage > server.CurrentLoadPercentage)
+                    {
+                        lessLoaded = server;
+                    }
+                }
+                lessLoaded.AddVm(vm);
             }
         }
     }

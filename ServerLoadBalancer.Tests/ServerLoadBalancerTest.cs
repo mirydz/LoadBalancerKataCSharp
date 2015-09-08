@@ -87,9 +87,9 @@ namespace ServerLoadBalancer.Tests
             loadBalancer.Balance(servers, vms);
         }
 
-        private Server[] ListOfServersWith(Server server)
+        private Server[] ListOfServersWith(params Server[] servers)
         {
-            return new Server[] { server };
+            return servers;
         }
 
         private Vm[] ListOfVmsWith(params Vm[] vms)

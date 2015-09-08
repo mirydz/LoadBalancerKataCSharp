@@ -9,8 +9,8 @@ namespace ServerLoadBalancer
     public class Server
     {
         private static readonly double MAXIMUM_LOAD = 100.0;
-        private int capacity;
         private List<Vm> vms = new List<Vm>();
+        public int Capacity { get; private set; }
         public double CurrentLoadPercentage { get; set; }
         public int VmsCount
         {
@@ -19,19 +19,19 @@ namespace ServerLoadBalancer
 
         public Server(int capacity)
         {
-            this.capacity = capacity;
+            this.Capacity = capacity;
         }
 
         public bool Contains(Vm vm)
         {
-            return true;
+            return this.vms.Contains(vm);
         }
 
         public void AddVm(Vm vm)
         {
             this.vms.Add(vm);
             this.CurrentLoadPercentage = (double)vm.Size
-                / (double) this.capacity * MAXIMUM_LOAD;
+                / (double) this.Capacity * MAXIMUM_LOAD;
         }
     }
 }
