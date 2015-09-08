@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,12 @@ namespace ServerLoadBalancer
             this.vms.Add(vm);
             this.CurrentLoadPercentage = (double)vm.Size
                 / (double) this.Capacity * MAXIMUM_LOAD;
+        }
+
+        public bool CanFit(Vm vm)
+        {
+            return this.CurrentLoadPercentage
+                   + ((double) vm.Size / (double) this.Capacity * MAXIMUM_LOAD) <= MAXIMUM_LOAD;
         }
     }
 }

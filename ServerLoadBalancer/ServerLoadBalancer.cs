@@ -12,12 +12,18 @@ namespace ServerLoadBalancer
         {
             foreach (var vm in vms)
             {
-                Server lessLoaded = ExtractLessLoadedServer(servers);
-                lessLoaded.AddVm(vm);
+                var serversWithEnoughCapacity = new List<Server>();
+                foreach (var server in servers)
+                {
+                    if (server.CanFit(vm))
+                        serversWithEnoughCapacity.Add(server);
+                }
+                Server lessLoaded = ExtractLessLoadedServer(serversWithEnoughCapacity);
+                lessLoaded?.AddVm(vm);
             }
         }
 
-        private Server ExtractLessLoadedServer(Server[] servers)
+        private Server ExtractLessLoadedServer(List<Server> servers)
         {
             Server lessLoaded = null;
             foreach (var server in servers)
